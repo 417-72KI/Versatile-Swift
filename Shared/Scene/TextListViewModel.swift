@@ -13,6 +13,7 @@ final class TextListViewModel: ObservableObject {
     @Published var texts: [TextModel] = []
     @Published var error: Error?
     @Published var hasNext: Bool = true
+    @Published var isLoading: Bool = false
 
     private let client: APIClient
     private var cancellables: Set<AnyCancellable> = []
@@ -36,15 +37,17 @@ extension TextListViewModel {
 
 extension TextListViewModel {
     func fetchNext() {
-        guard hasNext else { return }
+        guard hasNext, !isLoading else { return }
         let skip = texts.count
         let limit = 20
+        isLoading = true
         client.publish(request: VersatileAPI.Text.GetAll(orderBy: (.createdAt, desc: true), limit: limit, skip: skip))
             .flatMap { [self] in $0.map { fetchUser(of: $0) }.zip() }
             .map { $0.map(TextModel.init) }
             .receive(on: DispatchQueue.main)
             .sink(
                 receiveCompletion: {
+                    self.isLoading = false
                     switch $0 {
                     case let .failure(error):
                         self.error = error
@@ -56,7 +59,8 @@ extension TextListViewModel {
                     self.texts += $0
                     self.hasNext = $0.count >= limit
                 }
-            ).store(in: &cancellables)
+            )
+            .store(in: &cancellables)
     }
 }
 
@@ -68,6 +72,8 @@ private extension TextListViewModel {
                 .eraseToAnyPublisher()
         }
         return client.publish(request: VersatileAPI.User.Get(userId: userId))
+            .map { $0 as UserEntity? }
+            .catch { _ in Just(nil).setFailureType(to: Error.self) }
             .map { (text, $0) }
             .eraseToAnyPublisher()
     }

@@ -60,6 +60,8 @@
 		B9E933EB26B5CF56003C729E /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9E933E926B5CF56003C729E /* String.swift */; };
 		B9E933ED26B5D04B003C729E /* ResponseKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9E933EC26B5D04B003C729E /* ResponseKey.swift */; };
 		B9E933EE26B5D04B003C729E /* ResponseKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9E933EC26B5D04B003C729E /* ResponseKey.swift */; };
+		B9E933F026B5E335003C729E /* ScrollViewOffsetPreferenceKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9E933EF26B5E335003C729E /* ScrollViewOffsetPreferenceKey.swift */; };
+		B9E933F126B5E335003C729E /* ScrollViewOffsetPreferenceKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9E933EF26B5E335003C729E /* ScrollViewOffsetPreferenceKey.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -119,6 +121,7 @@
 		B9E933E626B5C7E2003C729E /* Publisher+Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Publisher+Array.swift"; sourceTree = "<group>"; };
 		B9E933E926B5CF56003C729E /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		B9E933EC26B5D04B003C729E /* ResponseKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseKey.swift; sourceTree = "<group>"; };
+		B9E933EF26B5E335003C729E /* ScrollViewOffsetPreferenceKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollViewOffsetPreferenceKey.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -286,6 +289,7 @@
 			children = (
 				B9E933B626B57757003C729E /* Extension */,
 				B9E933A626B52EB5003C729E /* Applicable.swift */,
+				B9E933EF26B5E335003C729E /* ScrollViewOffsetPreferenceKey.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -513,6 +517,7 @@
 				B9E933B826B5775E003C729E /* Alert.swift in Sources */,
 				B9E933B126B53097003C729E /* LoginResponseEntity.swift in Sources */,
 				B9E933D526B5A270003C729E /* VersatileAPI+Text.swift in Sources */,
+				B9E933F026B5E335003C729E /* ScrollViewOffsetPreferenceKey.swift in Sources */,
 				B9E9337F26B52234003C729E /* VersatileApp.swift in Sources */,
 				B9E933D826B5A299003C729E /* TextEntity.swift in Sources */,
 				B9E933CF26B59DB4003C729E /* TextListViewModel.swift in Sources */,
@@ -540,6 +545,7 @@
 				B9E933E826B5C7E2003C729E /* Publisher+Array.swift in Sources */,
 				B9E933AB26B53023003C729E /* VersatileAPI.swift in Sources */,
 				B9E933A826B52EB5003C729E /* Applicable.swift in Sources */,
+				B9E933F126B5E335003C729E /* ScrollViewOffsetPreferenceKey.swift in Sources */,
 				B9E933B526B530AD003C729E /* Entity.swift in Sources */,
 				B9E933D026B59DB4003C729E /* TextListViewModel.swift in Sources */,
 				B9E933CD26B594F4003C729E /* AppState.swift in Sources */,
