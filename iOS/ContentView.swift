@@ -8,14 +8,15 @@
 import SwiftUI
 
 struct ContentView: View {
+    let apiClient: APIClient
+
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+        LoginView(viewModel: .init(client: apiClient))
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        ContentView(apiClient: APIClientMock())
     }
 }
