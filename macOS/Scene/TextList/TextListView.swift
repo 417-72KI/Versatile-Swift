@@ -14,13 +14,18 @@ struct TextListView: View {
     var body: some View {
         VStack {
             Text("Home")
-            ScrollView {
-                ForEach(viewModel.texts, id: \.id) {
-                    TextListRowView(model: $0)
-                }
+                .padding(8)
+            Divider()
+            ScrollView(.vertical) {
+                VStack {
+                    ForEach(viewModel.texts, id: \.id) {
+                        TextListRowView(model: $0)
+                    }
+                    Spacer(minLength: 30)
+                }.frame(maxWidth: .infinity)
             }
         }
-        .frame(minWidth: 320, minHeight: 160)
+        .frame(minWidth: 400, minHeight: 400)
         .alert(isPresented: viewModel.isAlertDisplaying) {
             Alert(error: viewModel.error!)
         }

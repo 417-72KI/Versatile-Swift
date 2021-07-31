@@ -13,25 +13,26 @@ struct LoginView: View {
 
     var body: some View {
         VStack {
-            Text("Login to Versatile")
+            Text("Welcome to Versatile!")
                 .font(.title)
             HStack {
                 Text("Login name")
                 TextField("Login name", text: $viewModel.name)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
             }
-            HStack {
+            .font(.headline)
+            HStack(alignment: .top) {
                 Text("Description")
                 TextEditor(text: $viewModel.description)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
             }
+            .font(.headline)
             Button("Login") {
                 viewModel.login {
                     appState.userId = $0
                 }
             }
-        }.padding(8)
-        .frame(minWidth: 360, minHeight: 180)
+        }
+        .padding(8)
+        .frame(width: 360, height: 160)
         .alert(isPresented: viewModel.isAlertDisplaying) {
             Alert(error: viewModel.error!)
         }
