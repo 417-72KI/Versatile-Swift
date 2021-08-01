@@ -16,7 +16,14 @@ struct PostTextView: View {
             TextEditor(text: $text)
                 .frame(height: 160)
             Button("Post") { postAction(text) }
+                .disabled(text.isEmpty)
         }
+    }
+}
+
+extension PostTextView {
+    func clear() {
+        text = ""
     }
 }
 
