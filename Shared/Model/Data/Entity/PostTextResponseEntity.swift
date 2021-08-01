@@ -8,4 +8,5 @@
 import Foundation
 
 struct PostTextResponseEntity: Entity {
+    var id: String
 }
