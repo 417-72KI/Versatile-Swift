@@ -14,7 +14,7 @@ struct PostTextView: View {
     var body: some View {
         VStack {
             TextEditor(text: $text)
-                .frame(minHeight: 160)
+                .frame(height: 160)
             Button("Post") { postAction(text) }
         }
     }
