@@ -14,6 +14,7 @@ final class TextListViewModel: ObservableObject {
     @Published var error: Error?
     @Published var hasNext: Bool = true
     @Published var isLoading: Bool = false
+    @Published var isPosting: Bool = false
 
     private var userList: [String: UserEntity] = [:]
 
@@ -38,16 +39,48 @@ extension TextListViewModel {
 }
 
 extension TextListViewModel {
-    func fetchNext() {
-        guard hasNext, !isLoading else { return }
-        let skip = texts.count
+    func fetchFirst() {
         let limit = 20
+        fetch(from: 0, limit: limit)
+            .sink(
+                receiveCompletion: { _ in },
+                receiveValue: { [weak self] in
+                    self?.texts = $0
+                    self?.hasNext = $0.count >= limit
+                }
+            )
+            .store(in: &cancellables)
+    }
+
+    func fetchNext() {
+        guard hasNext else { return }
+        let offset = texts.count
+        let limit = 20
+        fetch(from: offset, limit: limit)
+            .sink(
+                receiveCompletion: { _ in },
+                receiveValue: { [weak self] in
+                    self?.texts += $0
+                    self?.hasNext = $0.count >= limit
+                }
+            )
+            .store(in: &cancellables)
+    }
+}
+
+private extension TextListViewModel {
+    func fetch(from offset: Int, limit: Int) -> AnyPublisher<[TextModel], Error> {
+        guard !isLoading else {
+            return Just([])
+                .setFailureType(to: Error.self)
+                .eraseToAnyPublisher()
+        }
         isLoading = true
-        client.publish(request: VersatileAPI.Text.GetAll(orderBy: (.createdAt, desc: true), limit: limit, skip: skip))
+        return client.publish(request: VersatileAPI.Text.GetAll(orderBy: (.createdAt, desc: true), limit: limit, skip: offset))
             .flatMap { [weak self] in $0.compactMap { self?.fetchUser(of: $0) }.zip() }
             .map { $0.map(TextModel.init) }
             .receive(on: DispatchQueue.main)
-            .sink(
+            .handleEvents(
                 receiveCompletion: { [weak self] in
                     self?.isLoading = false
                     switch $0 {
@@ -56,13 +89,9 @@ extension TextListViewModel {
                     case .finished:
                         self?.error = nil
                     }
-                },
-                receiveValue: { [weak self] in
-                    self?.texts += $0
-                    self?.hasNext = $0.count >= limit
                 }
             )
-            .store(in: &cancellables)
+            .eraseToAnyPublisher()
     }
 }
 
@@ -85,5 +114,31 @@ private extension TextListViewModel {
             .catch { _ in Just(nil).setFailureType(to: Error.self) }
             .map { (text, $0) }
             .eraseToAnyPublisher()
+    }
+}
+
+extension TextListViewModel {
+    func post(_ text: String) {
+        guard !text.isEmpty, !isPosting else { return }
+
+        isPosting = true
+        client.publish(request: VersatileAPI.Text.Post(text: text))
+            .receive(on: DispatchQueue.main)
+            .sink(
+                receiveCompletion: { [weak self] in
+                    self?.isPosting = false
+                    switch $0 {
+                    case let .failure(error):
+                        self?.error = error
+                    case .finished:
+                        self?.error = nil
+                    }
+                },
+                receiveValue: { [weak self] in
+                    print($0)
+                    self?.fetchFirst()
+                }
+            )
+            .store(in: &cancellables)
     }
 }

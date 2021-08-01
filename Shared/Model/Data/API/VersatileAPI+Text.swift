@@ -27,6 +27,30 @@ extension VersatileAPI {
                 ]
             }
         }
+
+        struct Post: APIRequest {
+            typealias ResponseType = PostTextResponseEntity
+
+            var text: String
+            var inReplyToUserId: String?
+            var inReplyToTextId: String?
+
+            var path: String { "/text" }
+            var method: HTTPMethod { .post }
+            var header: [String : String] {
+                ["Authorization": "HelloWorld"]
+            }
+            var body: RequestBody? {
+                JSONRequestBody(
+                    object: [
+                        "text": text,
+                        "in_reply_to_user_id": inReplyToUserId,
+                        "in_reply_to_text_id": inReplyToTextId
+                    ]
+                    .filter { $0.value != nil }
+                )
+            }
+        }
     }
 }
 

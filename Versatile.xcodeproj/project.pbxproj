@@ -62,6 +62,10 @@
 		B9E933EE26B5D04B003C729E /* ResponseKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9E933EC26B5D04B003C729E /* ResponseKey.swift */; };
 		B9E933F026B5E335003C729E /* ScrollViewOffsetPreferenceKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9E933EF26B5E335003C729E /* ScrollViewOffsetPreferenceKey.swift */; };
 		B9E933F126B5E335003C729E /* ScrollViewOffsetPreferenceKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9E933EF26B5E335003C729E /* ScrollViewOffsetPreferenceKey.swift */; };
+		B9E933F326B67A5E003C729E /* PostTextResponseEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9E933F226B67A5E003C729E /* PostTextResponseEntity.swift */; };
+		B9E933F426B67A5E003C729E /* PostTextResponseEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9E933F226B67A5E003C729E /* PostTextResponseEntity.swift */; };
+		B9E933F726B67B4B003C729E /* PostTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9E933F626B67B4B003C729E /* PostTextView.swift */; };
+		B9E933F826B67B4B003C729E /* PostTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9E933F626B67B4B003C729E /* PostTextView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -122,6 +126,8 @@
 		B9E933E926B5CF56003C729E /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		B9E933EC26B5D04B003C729E /* ResponseKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseKey.swift; sourceTree = "<group>"; };
 		B9E933EF26B5E335003C729E /* ScrollViewOffsetPreferenceKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollViewOffsetPreferenceKey.swift; sourceTree = "<group>"; };
+		B9E933F226B67A5E003C729E /* PostTextResponseEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTextResponseEntity.swift; sourceTree = "<group>"; };
+		B9E933F626B67B4B003C729E /* PostTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTextView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -174,6 +180,7 @@
 				B9E9335626B52231003C729E /* VersatileApp.swift */,
 				B9E933CB26B594F4003C729E /* AppState.swift */,
 				B9E9339D26B52854003C729E /* Scene */,
+				B9E933F526B67B3F003C729E /* Component */,
 				B9E9339326B52377003C729E /* Model */,
 				B9E933A526B52EA9003C729E /* Util */,
 				B9E9335826B52234003C729E /* Assets.xcassets */,
@@ -301,6 +308,7 @@
 				B9E933B026B53097003C729E /* LoginResponseEntity.swift */,
 				B9E933D726B5A299003C729E /* TextEntity.swift */,
 				B9E933DD26B5BE1E003C729E /* UserEntity.swift */,
+				B9E933F226B67A5E003C729E /* PostTextResponseEntity.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -336,6 +344,14 @@
 				B9E933D126B5A237003C729E /* TextListRowView.swift */,
 			);
 			path = TextList;
+			sourceTree = "<group>";
+		};
+		B9E933F526B67B3F003C729E /* Component */ = {
+			isa = PBXGroup;
+			children = (
+				B9E933F626B67B4B003C729E /* PostTextView.swift */,
+			);
+			path = Component;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -500,7 +516,9 @@
 				B9E933E126B5BEE7003C729E /* TextModel.swift in Sources */,
 				B9E933BD26B57CDB003C729E /* RequestBody.swift in Sources */,
 				B9E9339F26B52863003C729E /* LoginViewModel.swift in Sources */,
+				B9E933F326B67A5E003C729E /* PostTextResponseEntity.swift in Sources */,
 				B9E933DE26B5BE1E003C729E /* UserEntity.swift in Sources */,
+				B9E933F726B67B4B003C729E /* PostTextView.swift in Sources */,
 				B9E933EA26B5CF56003C729E /* String.swift in Sources */,
 				B9E933ED26B5D04B003C729E /* ResponseKey.swift in Sources */,
 				B9E9339626B523A5003C729E /* LoginView.swift in Sources */,
@@ -540,12 +558,14 @@
 				B9E9339B26B52482003C729E /* LoginView.swift in Sources */,
 				B9E933D326B5A237003C729E /* TextListRowView.swift in Sources */,
 				B9E933CA26B59268003C729E /* AppDelegate.swift in Sources */,
+				B9E933F826B67B4B003C729E /* PostTextView.swift in Sources */,
 				B9E933EE26B5D04B003C729E /* ResponseKey.swift in Sources */,
 				B9E933C526B591B1003C729E /* TextListView.swift in Sources */,
 				B9E933E826B5C7E2003C729E /* Publisher+Array.swift in Sources */,
 				B9E933AB26B53023003C729E /* VersatileAPI.swift in Sources */,
 				B9E933A826B52EB5003C729E /* Applicable.swift in Sources */,
 				B9E933F126B5E335003C729E /* ScrollViewOffsetPreferenceKey.swift in Sources */,
+				B9E933F426B67A5E003C729E /* PostTextResponseEntity.swift in Sources */,
 				B9E933B526B530AD003C729E /* Entity.swift in Sources */,
 				B9E933D026B59DB4003C729E /* TextListViewModel.swift in Sources */,
 				B9E933CD26B594F4003C729E /* AppState.swift in Sources */,

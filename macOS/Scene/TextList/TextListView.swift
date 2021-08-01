@@ -21,27 +21,33 @@ struct TextListView: View {
             Text("Home")
                 .padding(8)
             Divider()
-            ScrollView(.vertical) {
-                LazyVStack {
-                    ForEach(viewModel.texts, id: \.id) {
-                        TextListRowView(model: $0)
+            HStack {
+                ScrollView(.vertical) {
+                    LazyVStack {
+                        ForEach(viewModel.texts, id: \.id) {
+                            TextListRowView(model: $0)
+                        }
+                        Spacer(minLength: 30)
                     }
-                    Spacer(minLength: 30)
-                }
-                .frame(maxWidth: .infinity)
-                GeometryReader { g in
-                    let offset = g.frame(in: .named("scroll")).minY
-                    Color.clear.preference(key: ScrollViewOffsetPreferenceKey.self, value: offset)
+                    .frame(maxWidth: .infinity)
+                    GeometryReader { g in
+                        let offset = g.frame(in: .named("scroll")).minY
+                        Color.clear.preference(key: ScrollViewOffsetPreferenceKey.self, value: offset)
 
+                    }
                 }
-            }
-            .onPreferenceChange(ScrollViewOffsetPreferenceKey.self) {
-                if $0 > -30 {
-                    viewModel.fetchNext()
+                .onPreferenceChange(ScrollViewOffsetPreferenceKey.self) {
+                    if $0 > -30 {
+                        viewModel.fetchNext()
+                    }
                 }
+                .frame(minWidth: 400, minHeight: 400)
+                PostTextView {
+                    viewModel.post($0)
+                }
+                .frame(minWidth: 320)
             }
         }
-        .frame(minWidth: 400, minHeight: 400)
         .alert(isPresented: viewModel.isAlertDisplaying) {
             Alert(error: viewModel.error!)
         }

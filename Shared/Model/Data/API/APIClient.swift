@@ -43,13 +43,17 @@ final class APIClientImpl: APIClient {
 
     func publish<T: APIRequest, V>(request: T) -> AnyPublisher<V, Error> where V == T.ResponseType {
         do {
-            return session.dataTaskPublisher(for: try request.asURLRequest())
+            let urlRequest = try request.asURLRequest()
+            print(urlRequest)
+            return session.dataTaskPublisher(for: urlRequest)
                 .retry(3)
                 .map(\.data)
                 .handleEvents(receiveOutput: { print(String(data: $0, encoding: .utf8) ?? "") })
                 .decode(type: V.self, decoder: decoder)
-                .handleEvents(receiveCompletion: { print($0) })
-                .handleEvents(receiveOutput: { print($0) })
+                .handleEvents(
+                    receiveOutput: { print($0) },
+                    receiveCompletion: { print($0) }
+                )
                 .eraseToAnyPublisher()
         } catch {
             return Fail(error: error)
