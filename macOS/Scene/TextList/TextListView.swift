@@ -17,11 +17,12 @@ struct TextListView: View {
     }
 
     var body: some View {
-        VStack {
-            Text("Home")
-                .padding(8)
-            Divider()
-            HStack {
+        HStack {
+            VStack {
+                Text("Home")
+                    .padding(8)
+                    .frame(alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                Divider()
                 ScrollView(.vertical) {
                     LazyVStack {
                         ForEach(viewModel.texts, id: \.id) {
@@ -33,7 +34,6 @@ struct TextListView: View {
                     GeometryReader { g in
                         let offset = g.frame(in: .named("scroll")).minY
                         Color.clear.preference(key: ScrollViewOffsetPreferenceKey.self, value: offset)
-
                     }
                 }
                 .onPreferenceChange(ScrollViewOffsetPreferenceKey.self) {
@@ -42,11 +42,22 @@ struct TextListView: View {
                     }
                 }
                 .frame(minWidth: 400, minHeight: 400)
-                PostTextView {
-                    viewModel.post($0)
+                Divider()
+                HStack {
+                    Spacer()
+                    Button(
+                        action: { viewModel.fetchFirst() },
+                        label: { Image(systemName: "arrow.clockwise") }
+                    )
+                    .frame(alignment: .trailing)
+                    .keyboardShortcut(KeyEquivalent("r"), modifiers: /*@START_MENU_TOKEN@*/.command/*@END_MENU_TOKEN@*/)
                 }
-                .frame(minWidth: 320)
+                .padding(8)
             }
+            PostTextView {
+                viewModel.post($0)
+            }
+            .frame(minWidth: 320)
         }
         .alert(isPresented: viewModel.isAlertDisplaying) {
             Alert(error: viewModel.error!)
