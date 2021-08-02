@@ -11,7 +11,9 @@ struct ContentView: View {
     let apiClient: APIClient
 
     var body: some View {
-        LoginView(viewModel: .init(client: apiClient))
+        NavigationView {
+            LoginView(viewModel: .init(client: apiClient))
+        }
     }
 }
 

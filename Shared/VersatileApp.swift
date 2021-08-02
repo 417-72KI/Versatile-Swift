@@ -29,6 +29,7 @@ struct VersatileApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView(apiClient: APIClientImpl(session: .shared))
+                .environmentObject(appState)
         }
     }
     #endif
