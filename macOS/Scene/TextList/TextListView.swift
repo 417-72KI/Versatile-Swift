@@ -24,11 +24,13 @@ struct TextListView: View {
                     .frame(alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                 Divider()
                 ScrollView(.vertical) {
-                    LazyVStack {
-                        ForEach(viewModel.texts, id: \.id) {
-                            TextListRowView(model: $0)
+                    LazyVGrid(columns: [.init()]) {
+                        VStack {
+                            ForEach(viewModel.texts, id: \.id) {
+                                TextListRowView(model: $0)
+                            }
+                            Spacer(minLength: 30)
                         }
-                        Spacer(minLength: 30)
                     }
                     .frame(maxWidth: .infinity)
                     GeometryReader { g in
